@@ -1,6 +1,8 @@
 package com.lzm.refreshlistview.utils;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -24,6 +26,7 @@ public class TestActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private List<String> mDatas;
     private TestAdapter mTestAdapter;
+    private SwipeRefreshLayout mSpRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,22 @@ public class TestActivity extends AppCompatActivity {
                 Toast.makeText(TestActivity.this, position + " long click",
                         Toast.LENGTH_SHORT).show();
                 mTestAdapter.removeData(position);
+            }
+        });
+
+        mSpRefresh = (SwipeRefreshLayout) findViewById(R.id.sp_refresh);
+        mSpRefresh.setColorSchemeResources(android.R.color.holo_red_light, android.R.color.holo_green_light, android.R.color.holo_blue_light);
+//        mSpRefresh.setDistanceToTriggerSync();
+        mSpRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                System.out.println("---------- onRefresh ");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSpRefresh.setRefreshing(false);
+                    }
+                }, 2000);
             }
         });
     }
