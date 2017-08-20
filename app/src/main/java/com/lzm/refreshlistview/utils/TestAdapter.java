@@ -14,6 +14,7 @@ import java.util.List;
 /**
  * Created by lzm on 2017/8/19.
  */
+
 class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder> {
 
     private OnItemClickListener mItemClickListener;
@@ -88,4 +89,50 @@ class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestViewHolder> {
     public void setOnItemClickListener(OnItemClickListener itemClickListener){
         this.mItemClickListener = itemClickListener;
     }
+
+
+    /**
+     * 多条目的实现：
+     */
+    /*
+    public interface TypeInterf {
+        public int getType();
+    }
+
+    public class Item_a implements TypeInterf {
+        String text1;
+        String text2;
+
+        public String getText1() {
+            return text1;
+        }
+
+        public void setText1(String text1) {
+            this.text1 = text1;
+        }
+        @Override
+        public int getType() {
+            return R.layout.item_a;
+        }
+    }
+        重写getItemViewType方法
+        @Override
+        public int getItemViewType(int position) {
+            return list.get(position).getType();
+        }
+
+            根据不同的type实现不同的ViewHolder
+     @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        RecyclerView.ViewHolder holder = null;
+        View view = LayoutInflater.from(context).inflate(viewType, parent, false);
+        if(viewType==R.layout.item_a){
+            holder = new ViewHolder_a(view);
+        }else{
+            holder = new ViewHolder_b(view);
+        }
+        return holder;
+    }
+     */
+
 }
